@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.article-card img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.article-card p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.article img{
+    height: 500px;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 100%;
+}
