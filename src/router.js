@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Article from "./pages/Article";
 import ArticleCreate from './pages/Articles/Create/Index';
 import ArticleEdit from "./pages/Articles/Edit/Index";
+import ArticlesList from "./pages/Articles/List/Index";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login />,
+            },
+            {
+                path: "/posts",
+                element: <ArticlesList />
             },
             {
                 path: "/posts/create",
