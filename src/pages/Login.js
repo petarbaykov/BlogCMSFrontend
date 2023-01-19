@@ -21,7 +21,6 @@ export default function Login() {
                             account</h2>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={login}>
-                    <input type="hidden" name="remember" value="true" />
                     <div className="-space-y-px rounded-md shadow-sm">
                         <div>
                             <label htmlFor="username" className="sr-only">Username</label>

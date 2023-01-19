@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Article from "./pages/Article";
+import ArticleCreate from './pages/Articles/Create/Index';
+import ArticleEdit from "./pages/Articles/Edit/Index";
 
 const router = createBrowserRouter([
     {
@@ -22,9 +24,18 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
+                path: "/posts/create",
+                element: <ArticleCreate />
+            },
+            {
+                path: "/posts/edit/:id",
+                element: <ArticleEdit />
+            },
+            {
                 path: "/posts/:id",
                 element: <Article />
-            }
+            },
+
         ]
     }
 ]);

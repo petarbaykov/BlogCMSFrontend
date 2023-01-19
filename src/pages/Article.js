@@ -11,7 +11,7 @@ export default function Article(props) {
             setArticle(response.data);
         }
         getArticle();
-    }, [])
+    }, []);
 
     return (
         <div className="container !pt-0 article">
@@ -46,9 +46,7 @@ export default function Article(props) {
                     </div>
                 </div>
             </div>
-            <article className="max-w-screen-md mx-auto">
-                {article.content}
-            </article>
+            <article dangerouslySetInnerHTML={{ __html: article.content }} className="max-w-screen-md mx-auto" />
         </div>
     );
 }
