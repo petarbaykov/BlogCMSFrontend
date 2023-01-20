@@ -1,18 +1,23 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import api from "../../../services/api";
 import {Link} from "react-router-dom";
 
 export default function ArticlesList() {
     const [articles, setArticles] = useState([]);
+    const [category, setCategory] = useState('');
 
     async function fetchArticles() {
-        const response = await api.get('/posts');
+        const response = await api.get(`/posts/users?categoryId=${category}`);
 
         setArticles(response.data);
     }
     useEffect( () => {
         fetchArticles();
     }, []);
+
+    useEffect(() => {
+        fetchArticles();
+    }, [category])
 
     const deleteArticle = async id => {
         await api.delete(`/posts/${id}`);
@@ -22,13 +27,23 @@ export default function ArticlesList() {
     return (
         <div className="container mx-auto">
 
-            <Link
-                to="/posts/create"
-                className="text-white inline-block my-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-                Add new Article
-            </Link>
-            <br />
+            <div className="flex justify-between">
+
+
+                <Link
+                    to="/posts/create"
+                    className="text-white inline-block my-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                    Add new Article
+                </Link>
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="">All</option>
+                    <option value="1">Tech</option>
+                    <option value="2">Drones</option>
+                    <option value="3">Business</option>
+                    <option value="4">Education</option>
+                </select>
+            </div>
             <div className="relative overflow-x-auto">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

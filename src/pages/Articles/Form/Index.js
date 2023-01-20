@@ -5,7 +5,7 @@ import api from "../../../services/api";
 export default function ArticleForm({ article, submitHandler }) {
     console.log(article);
     const [title, setTitle] = useState(article?.title || '');
-    const [category, setCategory] = useState(article?.category || '1');
+    const [category, setCategory] = useState(article?.category?.id || '1');
     const [image, setImage] = useState({});
     const editorRef = useRef(null);
 
@@ -15,6 +15,7 @@ export default function ArticleForm({ article, submitHandler }) {
         if (!image?.name) {
             data.delete("image");
         }
+
         data.append("content", editorRef.current.getContent());
 
         submitHandler(data);
