@@ -1,17 +1,32 @@
 import * as React from "react";
-import { Link, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {Link, Outlet, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import Cookies from 'js-cookie';
+import {setUser} from "./store/auth";
 
-function NavigationLink ({ to, text }) {
+function NavigationLink ({ to, text, onClick }) {
     return (
         <Link to={to}
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{text}</Link>
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              onClick={onClick}
+        >
+            {text}
+        </Link>
 
     )
 }
 
 export default function App (){
     const user = useSelector((state) => state.auth.user);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        Cookies.remove("authenticated");
+        dispatch(setUser(false));
+        console.log(navigate);
+        navigate("/");
+    }
 
     return (
         <div className="min-h-full">
@@ -28,7 +43,7 @@ export default function App (){
                                     ?
                                     <>
                                         <NavigationLink to="/posts" text="Manage Articles"/>
-                                        <NavigationLink to="/logout" text="Logout"/>
+                                        <NavigationLink text="Logout" onClick={logout}/>
                                     </>
                                     :
                                     <>

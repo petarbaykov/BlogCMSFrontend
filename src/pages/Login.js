@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import api from "../services/api";
+import {setUser} from "../store/auth";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const login = async e => {
         e.preventDefault();
 
         const response = await api.post('/auth/login', { username, password });
 
-        console.log(response);
+        if (response.status === 200) {
+            dispatch(setUser(true));
+            navigate("/");
+        }
     }
 
     return (

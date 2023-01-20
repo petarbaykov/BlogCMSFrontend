@@ -27,8 +27,6 @@ function Signup() {
             dispatch(setUser(true));
             navigate("/");
         }
-
-        console.log(response);
     };
 
     return (

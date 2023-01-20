@@ -12,7 +12,6 @@ export default function ArticleForm({ article, submitHandler }) {
     const submit = async e => {
         e.preventDefault();
         const data = new FormData(e.target);
-        console.log("image", image);
         if (!image?.name) {
             data.delete("image");
         }
@@ -24,7 +23,7 @@ export default function ArticleForm({ article, submitHandler }) {
     return (
         <div className="container mx-auto">
             <form onSubmit={submit}>
-                <div>
+                <div className="my-5">
                     <label htmlFor="title" className="sr-only">Title</label>
                     <input id="title"
                            name="title"
@@ -34,7 +33,7 @@ export default function ArticleForm({ article, submitHandler }) {
                            className="relative block w-full appearance-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                            placeholder="Title" />
                 </div>
-                <div>
+                <div className="my-5">
                     <label htmlFor="title" className="sr-only">Content</label>
                     <Editor
                         onInit={(evt, editor) => editorRef.current = editor}
@@ -55,7 +54,7 @@ export default function ArticleForm({ article, submitHandler }) {
                         }}
                     />
                 </div>
-                <div>
+                <div className="my-5">
                     <label htmlFor="category" className="sr-only">Category</label>
                     <select
                         name="category"
@@ -63,9 +62,12 @@ export default function ArticleForm({ article, submitHandler }) {
                         onChange={(e) => setCategory(e.target.value)}
                         className="relative block w-full appearance-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                         <option value="1">Tech</option>
+                        <option value="2">Drones</option>
+                        <option value="3">Business</option>
+                        <option value="4">Education</option>
                     </select>
                 </div>
-                <div>
+                <div className="my-5">
                     <label htmlFor="image" className="sr-only">Image</label>
                     <input id="image"
                            name="image"

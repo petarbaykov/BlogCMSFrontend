@@ -9,8 +9,8 @@ export const userSlice = createSlice({
         user: Boolean(authenticated)
     },
     reducers: {
-        setUser: (state, user) => {
-            state.user = user;
+        setUser: (state, { payload }) => {
+            state.user = payload;
         }
     }
 });
