@@ -14,12 +14,12 @@ export default function Article(props) {
     }, []);
 
     return (
-        <div className="container !pt-0 article">
+        <div className="container !pt-0 article mx-auto">
             <div className="mx-auto ">
                 <h1 className="max-w-screen-md mx-auto mt-2 mb-3 text-3xl font-semibold tracking-tight text-center lg:leading-snug text-brand-primary lg:text-4xl">
                     {article.title}
                 </h1>
-                <div className="text-center">
+                <div className="text-center primary-image">
                     <img className="rounded-lg" src={`http://localhost:8080/images/${article.image}`} alt="" />
                 </div>
 
