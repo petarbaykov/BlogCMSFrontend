@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../store/auth";
 
 import api from '../services/api';
 
@@ -7,9 +10,10 @@ function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const signup = async e => {
-        console.log(e);
         e.preventDefault();
 
         const response = await api.post('/auth/signup', {
@@ -18,6 +22,11 @@ function Signup() {
             email,
             password
         });
+
+        if (response.status === 200) {
+            dispatch(setUser(true));
+            navigate("/");
+        }
 
         console.log(response);
     };
@@ -39,7 +48,7 @@ function Signup() {
                                    value={username}
                                    onChange={(e) => setUsername(e.target.value)}
                                    required
-                                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                    placeholder="Username" />
                         </div>
                         <div>
@@ -50,7 +59,7 @@ function Signup() {
                                    value={name}
                                    onChange={(e) => setName(e.target.value)}
                                    required
-                                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                   className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                    placeholder="Name" />
                         </div>
                         <div>
@@ -62,7 +71,7 @@ function Signup() {
                                    value={email}
                                    onChange={(e) => setEmail(e.target.value)}
                                    required
-                                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                   className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                    placeholder="Email address" />
                         </div>
                         <div>
